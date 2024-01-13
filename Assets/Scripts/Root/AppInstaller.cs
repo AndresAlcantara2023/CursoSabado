@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
+using App.Services;
 using Domain.Services;
 using Domain.UseCases;
-using App.Services;
 
-
-public class AppInstaller : MonoBehaviour
+public class AppInstaller : MonoInstaller
 {
-    private ISenceLoad _senceLoad;
-
-    private void Start()
+    public override void InstallBindings()
     {
-        _senceLoad = new UnityScenceLoad();
-        var app = new AppInitializer(_senceLoad);
-        DontDestroyOnLoad(target:this);
+        Container.Bind<ISenceLoad>().To<UnityScenceLoad>().AsSingle().NonLazy();
+        Container.Bind<AppInitializer>().AsSingle().NonLazy();
     }
 }

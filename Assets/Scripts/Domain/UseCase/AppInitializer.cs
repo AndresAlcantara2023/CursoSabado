@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Domain.Services;
 using Cysharp.Threading.Tasks;
+using Shared;
+using System.Threading.Tasks;
 
 namespace Domain.UseCases
 {
@@ -18,8 +20,16 @@ namespace Domain.UseCases
 
         private async UniTaskVoid Initialize()
         {
-            await _senceLoad.LoadScenceAsync("Main");
+            //await Task.Delay(1500);
+            //await _senceLoad.LoadScenceAsync(AppDefaults.MainScene);
+            var watingTime = Task.Delay(1500);
+            var sceneLoad =  _senceLoad.LoadScenceAsync(AppDefaults.MainScene);
+
+            await Task.WhenAll(watingTime, sceneLoad.AsTask());
+            _senceLoad.ActivateScene();
         }
+
+
 
     }
 }

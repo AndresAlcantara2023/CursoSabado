@@ -9,5 +9,7 @@ namespace Domain.Services
 
         UniTask LoadScenceAsync(string scenceName);
 
+        void ActivateScene();
+
     }
 }

@@ -11,6 +11,12 @@ namespace App.Services
     public class UnityScenceLoad : ISenceLoad
     {
         private AsyncOperation _asyncOperation;
+
+        public void ActivateScene()
+        {
+            _asyncOperation.allowSceneActivation = true;
+        }
+
         public async UniTask LoadScenceAsync(string scenceName)
         {
             _asyncOperation = SceneManager.LoadSceneAsync(scenceName);
@@ -20,7 +26,7 @@ namespace App.Services
                 await Task.Yield();
             }
 
-            _asyncOperation.allowSceneActivation = true;
+            //_asyncOperation.allowSceneActivation = true;
 
         }
     }
