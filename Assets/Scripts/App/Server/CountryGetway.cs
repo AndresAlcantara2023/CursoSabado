@@ -40,6 +40,7 @@ public abstract class CountryGetway : IGateway , IPreloadService
         Assert.IsTrue(_isInitialized, "The gateway is not initialized");
         var type = typeof(T);
         if (_parserData.TryGetValue(type, out var result)) return (T)result;
+        return default(T);  // esta linea no la uses
     }
 
     public void Set<T>(T dataTransferObject) where T : IDataTransferObject
